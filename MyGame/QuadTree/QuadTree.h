@@ -1,3 +1,5 @@
+#include <SDL2/SDL.h>
+
 template <GameEntity> 
 class QuadTree
 {
@@ -8,9 +10,15 @@ class QuadTree
 		QuadTree * southEastChild;
 		
 	private:
-		const int QUAD_TREE_NODE_CAPACITY=4;
+		std::vector<GameEntity*> nodeObjects;
 		
+	private:
+		const int QUAD_TREE_NODE_CAPACITY=4;
 		int depth;
+		
+	private:
+		SDL_Rect QuadTreeBoundingBox;
+		
 		
 	public:
 		QuadTree(const int);
