@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL/SDL_image.h>
 
 public class Game.h
 {
