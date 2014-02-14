@@ -5,15 +5,12 @@ QuadTreeNode::QuadTreeNode(const int depth = 0)
 	nodeChildren.clear();
 	nodeChildren.reserve(4);
 	
-	NodeBoundingBox.x = 0;
-	NodeBoundingBox.y = 0;
-	NodeBoundingBox.w = 0;
-	NodeBoundingBox.h = 0;
 	
-	nodeDepth = depth;
+	nodeBoundingBox = NULL;
 	parentNode = NULL;
 	isNodeFull = false;
 	isNodeLeaf = true;
+	nodeDepth = depth;
 }
 
 void QuadTreeNode::Split()

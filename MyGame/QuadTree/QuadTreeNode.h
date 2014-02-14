@@ -16,7 +16,7 @@ class QuadTreeNode
 		QuadTreeNode * parentNode;
 		
 	private:
-		SDL_Rect NodeBoundingBox;
+		SDL_Rect * nodeBoundingBox;
 		
 		
 	public:
