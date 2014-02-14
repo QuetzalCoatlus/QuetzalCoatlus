@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SdlRectCollision.h/SdlRectCollision.h>
 
 template <GameEntity> 
 class QuadTreeNode
@@ -12,8 +13,6 @@ class QuadTreeNode
 		
 	private:	
 		int nodeDepth;
-		bool isNodeFull;
-		bool isNodeLeaf;
 		QuadTreeNode * parentNode;
 		
 	private:
@@ -34,6 +33,8 @@ class QuadTreeNode
 	public:
 		bool HasChildren();
 		bool IsFull();
+		bool IsLeaf();
+		bool CanSplit(const int max_size);
 		bool CanSplit();
 		
 	private:

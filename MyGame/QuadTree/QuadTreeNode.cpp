@@ -127,3 +127,44 @@ bool QuadTreeNode::NodeCollision(const GameEntity * entity)
 {
 	return entity->CheckCollision(nodeBoundingBox);
 }
+
+bool QuadTreeNode::ChildCollision(const GameEntity * entity)
+{
+	if(!this->HasChildren())
+		return false;
+
+	for(int n = 0; n < QUAD_TREE_NODE_CAPACITY; ++n)
+	{
+		if(SdlRectCollision::Collides(entity->BoundingBox,nodeChildren[n]->nodeBoundingBox))
+			return true;
+	}
+
+	return false;
+}
+
+bool QuadTreeNode::HasChildren()
+{
+	return !nodeChildren.empty();
+}
+
+bool QuadTreeNode::IsLeaf()
+{
+	return nodeChildren.empty();
+}
+
+bool QuadTreeNode::IsFull()
+{
+	return isFull;
+}
+
+bool QuadTreeNode::CanSplit(const int maxSize)
+{
+	return depth < maxSize;
+}
+
+void DestroyQuadTree()
+{
+	if(HasChildren())
+		DestroyChildren();
+	nodeObjects.clear();
+}
