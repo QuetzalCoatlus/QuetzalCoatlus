@@ -15,7 +15,7 @@ void QuadTree::Update()
 	}
 }
 
-void QuadTree:UpdateEntity(GameEntity * entity)
+void QuadTree::UpdateEntity(GameEntity * entity)
 {
 	QuadTreeNode * nodeToInsertInto;
 
@@ -110,7 +110,7 @@ GameEntity * QuadTree::CheckCollisionOnLeaf(GameEntity * entity, QuadTreeNode * 
 	}
 }
 
-GameEntity * QuadTree:CheckCollisionOnChildren(GameEntity * entity, QuadTreeNode * startNode)
+GameEntity * QuadTree::CheckCollisionOnChildren(GameEntity * entity, QuadTreeNode * startNode)
 {
 	std::vector<QuadTreeNode*> startNodeChildren = 
 			startNode->GetNodeChildren();
