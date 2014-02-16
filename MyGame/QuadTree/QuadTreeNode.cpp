@@ -130,7 +130,7 @@ bool QuadTreeNode::ChildCollision(const GameEntity * entity)
 	if(!this->HasChildren())
 		return false;
 
-	for(int n = 0; n < QUAD_TREE_NODE_CAPACITY; ++n)
+	for(int n = 0; n < QuadTreeNodeCapacity; ++n)
 	{
 		if(SdlRectCollision::Collides(entity->BoundingBox,nodeChildren[n]->nodeBoundingBox))
 			return true;
@@ -164,4 +164,24 @@ void DestroyQuadTree()
 	if(HasChildren())
 		DestroyChildren();
 	nodeObjects.clear();
+}
+
+void QuadTreeNode::SetBoudingBox(SDL_Rect * boundingBox)
+{
+	nodeBoundingBox = boundingBox;
+}
+
+std::vector<QuadTreeNode*> * QuadTreeNode::GetNodeChildren()
+{
+	return &nodeChildren;
+}
+
+std::vector<GameEntity*> * QuadTreeNode::GetNodeObjects()
+{
+	return &nodeObjects;
+}
+
+QuadTreeNode * QuadTreeNode::GetParentNode()
+{
+	return this->parentNode;
 }

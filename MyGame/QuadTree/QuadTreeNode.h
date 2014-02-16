@@ -9,7 +9,7 @@ class QuadTreeNode
 		std::vector<QuadTreeNode*> nodeChildren;
 		
 	private:
-		const int QUAD_TREE_NODE_CAPACITY=4;
+		const int QuadTreeNodeCapacity=4;
 		
 	private:	
 		int nodeDepth;
@@ -24,10 +24,14 @@ class QuadTreeNode
 		
 	public:	
 		void Split();
-		bool Insert(GameEntity*,bool);
+		bool Insert(GameEntity*,bool,int);
 		bool Remove(GameEntity*);
 		bool NodeCollision(GameEntity*);
-		bool ChildCollision(GameEntity*)
+		bool ChildCollision(GameEntity*);
+		void SetBoundingBox(SDL_Rect*);
+		std::vector<QuadTreeNode*> * GetNodeChildren();
+		std::vector<GameEntity*> * GetNodeObjects();
+		QuadTreeNode * GetParentNode();
 		void DestroyQuadTree();
 		
 	public:
@@ -39,5 +43,4 @@ class QuadTreeNode
 		
 	private:
 		void SetParent(QuadTreeNode*);
-		void SetBoundingBox(SDL_Rect*);
 };
