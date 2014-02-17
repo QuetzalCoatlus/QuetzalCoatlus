@@ -1,4 +1,4 @@
-#include <GameTexture.h>
+#include "GameTexture.h"
 
 GameTexture::GameTexture()
 {
@@ -34,13 +34,13 @@ bool GameTexture::LoadTextureFromFile(std::string filename)
 	return gameTexture != NULL;
 }
 
-private void ColorKeyImage(SDL_Surface * surfaceToColorKey)
+void GameTexture::ColorKeyImage(SDL_Surface * surfaceToColorKey)
 {
 	Uint32 pixelFormattedColor = MapRgbToPixelFormat(surfaceToColorKey);
 	SDL_SetColorKey(surfaceToColorKey, SDL_TRUE, pixelFormattedColor);
 }
 
-private Uint32 MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat)
+Uint32 GameTexture::MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat)
 {
 	return SDL_MapRGB(surfaceWithPixelFormat->format, 0x00, 0xFF, 0xFF);
 }

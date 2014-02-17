@@ -28,6 +28,10 @@ public class GameTexture
 		void SetAlpha(Uint8);
 		int GetWidth();
 		int GetHeight();
+
+	private:
+		void ColorKeyImage(SDL_Surface * surfaceToColorKey);
+		Uint32 MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat);
 };
 
 #endif

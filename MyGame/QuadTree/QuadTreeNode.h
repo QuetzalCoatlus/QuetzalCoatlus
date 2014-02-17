@@ -1,5 +1,8 @@
-#include <SDL2/SDL.h>
-#include <SdlRectCollision.h/SdlRectCollision.h>
+#ifndef _QUADTREENODE_H_
+	#define _QUADTREENODE_H_
+
+#include <SDL.h>
+#include "SdlRectCollision.h"
 
 template <GameEntity> 
 class QuadTreeNode
@@ -43,4 +46,13 @@ class QuadTreeNode
 		
 	private:
 		void SetParent(QuadTreeNode*);
+		void DestroyAllChildren();
+		void DestroyChild(QuadTreeNode*);
+		void CreateNewChildren();
+		void GetChildBoundingBox(int);
+		void MoveNodeObjectsToChildren(QuadTreeNode*);
+		void MoveToChildIfCollisionOccurs(QuadTreeNode*,int);
+
 };
+
+#endif

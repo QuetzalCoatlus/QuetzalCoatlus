@@ -1,4 +1,7 @@
-#include <SdlRectCollision.h>
+#ifndef _SDLRECTCOLLISION_H_
+	#define _SDLRECTCOLLISION_H_
+
+#include "SdlRectCollision.h"
 
 SdlRectCollision::SdlRectCollision() {}
 
@@ -24,4 +27,6 @@ bool SdlRectCollision::Collides(SDL_Rect * firstRectangle, SDL_Rect * secondRect
 		return false;
 
 	return true;
-}
+};
+
+#endif

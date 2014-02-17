@@ -1,4 +1,4 @@
-#include <QuadTree.h>
+#include "QuadTree.h"
 
 QuadTreeNode::QuadTreeNode(const int depth = 0)
 {
@@ -21,7 +21,7 @@ void QuadTreeNode::Split()
 	CreateNewChildren();
 }
 
-private void DestroyOldChildren()
+void QuadTreeNode::DestroyOldChildren()
 {
     for(int i = 0; i < nodeChildren.size(); i++)
 	{
@@ -29,7 +29,7 @@ private void DestroyOldChildren()
 	}
 }
 
-private void DestroyChild(QuadTreeNode * child)
+void QuadTreeNode::DestroyChild(QuadTreeNode * child)
 {
 	for(int k = 0; k < child->nodeObjects.size(); ++k)
 	{
@@ -39,7 +39,7 @@ private void DestroyChild(QuadTreeNode * child)
 	child->nodeObjects.clear();
 }
 
-private void CreateNewChildren()
+void QuadTreeNode::CreateNewChildren()
 {
     for(int i = 0; i < nodeChildren.size(); ++i)
 	{
@@ -57,7 +57,7 @@ void QuadTreeNode::SetParent(QuadTreeNode * parent)
 	parentNode = this;
 }
 
-private void GetChildBoundingBox(int index)
+void QuadTreeNode::GetChildBoundingBox(int index)
 {
 	int childWidth = ++(nodeBoundingBox->w / 2);
 	int childHeight = ++(nodeBoundingBox->h / 2);
@@ -77,7 +77,7 @@ private void GetChildBoundingBox(int index)
 				};
 }
 
-private void MoveNodeObjectsToChildren(QuadTreeNode * child)
+void QuadTreeNode::MoveNodeObjectsToChildren(QuadTreeNode * child)
 {
 	for(int j = 0; j < nodeObjects.size(); ++j)
 	{
@@ -85,7 +85,7 @@ private void MoveNodeObjectsToChildren(QuadTreeNode * child)
 	}
 }
 
-private void MoveToChildIfCollisionOccurs(QuadTreeNode * child, int entityIndex)
+void QuadTreeNode::MoveToChildIfCollisionOccurs(QuadTreeNode * child, int entityIndex)
 {
 	if(child->NodeCollision(entity))
 	{

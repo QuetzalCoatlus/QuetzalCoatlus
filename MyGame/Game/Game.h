@@ -23,23 +23,29 @@ class Game
 		int ExecuteGame();
 		bool InitializeGame();
 		bool LoadAssets();
-		void RunGameLoop(SDL_Event*);
-		void RunEventLoop(SDL_Event*);
 		void HandleEvents(SDL_Event*);
-			void Quit();
 		void Update();
 		void Render();
 		void Cleanup();
 
+	public: 
+		//---Event Private Functions ---------/
+		void Quit();
 
 	private:
+		//---Execution Private Functions------/
+		void RunGameLoop(SDL_Event*);
+		void RunEventLoop(SDL_Event*);
+		//---Initialization Private Functions-/
 		bool InitializeSDL();
 		bool CreateWindow();
 		bool CreateRenderer();
 		void IntializeRendererColor();
 		bool InitializeImageLoading();
+		//---Render Private Functions---------/
 		void ClearScreen();
 		void UpdateScreen();
+		//---Cleanup Private Functions -------/
 		void DestroyWindow();
 		void QuitSdlSubSystems();
 };

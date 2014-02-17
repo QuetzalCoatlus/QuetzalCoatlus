@@ -1,6 +1,9 @@
-#include <SDL2/SDL.h>
-#include <GameEntity/GameEntity.h>
-#include <QuadTreeNode>
+#ifndef _QUADTREE_H_
+	#define _QUADTREE_H_
+
+#include <SDL.h>
+#include "GameEntity.h"
+#include "QuadTreeNode.h"
 class QuadTree
 {
 	public:
@@ -17,6 +20,9 @@ class QuadTree
 	
 	private:
 		GameEntity * CheckLeaf(const GameEntity*, QuadTreeNode * startNode = treeRoot);
+		bool InsertIntoFullQuad(GameEntity*,QuadTreeNode*);
+		bool InsertIntoBranch(GameEntity*,QuadTreeNode*);
+		bool InsertOnUpdate(GameEntity*,QuadTreeNode*);
 
 	private:
 		static const int QuadTreeMaxObjects = 32;
@@ -26,3 +32,5 @@ class QuadTree
 		QuadTreeNode treeRoot;
 		std::vector<GameEntity*> allEntitiesInQuadTree;
 };
+
+#endif

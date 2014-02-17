@@ -1,4 +1,4 @@
-#include <QuadTree.h>
+#include "QuadTree.h"
 
 QuadTree::QuadTree(const int treeWidth, const int treeHeight)
 {
@@ -49,7 +49,7 @@ bool QuadTree::Insert(GameEntity * entity, QuadTreeNode * startNode = treeNode)
 	return wasSuccessful;
 }
 
-private bool InsertIntoFullQuad(GameEntity * entity, QuadTreeNode * startNode)
+bool QuadTree::InsertIntoFullQuad(GameEntity * entity, QuadTreeNode * startNode)
 {
 	if(entity->Insert(entity))
 		return true;
@@ -66,7 +66,7 @@ private bool InsertIntoFullQuad(GameEntity * entity, QuadTreeNode * startNode)
 	}
 }
 
-private bool InsertIntoBranch(GameEntity * entity, QuadTreeNode * startNode)
+bool QuadTree::InsertIntoBranch(GameEntity * entity, QuadTreeNode * startNode)
 {
 	std::vector<QuadTreeNode*> startNodeChildren = 
 			startNode->GetNodeChildren();
@@ -78,7 +78,7 @@ private bool InsertIntoBranch(GameEntity * entity, QuadTreeNode * startNode)
 	}
 }
 
-private bool InsertOnUpdate(GameEntity * entity, QuadTreeNode * startNode)
+bool QuadTree::InsertOnUpdate(GameEntity * entity, QuadTreeNode * startNode)
 {
 	if(startNode->GetParentNode() == NULL)
 		return false;

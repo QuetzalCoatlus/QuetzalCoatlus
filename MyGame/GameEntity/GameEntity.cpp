@@ -1,6 +1,3 @@
-#include <GameEntity/GameEntity.h>
-#include <SdlRectCollision/SdlRectCollision.h>
-
 GameEntity::GameEntity(SDL_Rect * boundingBox)
 {
 	this->entityBoundingBox = boundingBox;

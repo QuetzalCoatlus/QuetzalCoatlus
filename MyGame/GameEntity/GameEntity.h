@@ -2,6 +2,8 @@
 	#define _GAMEENTITY_H_
 
 #include <SDL2/SDL.h>
+#include "GameEntity.h"
+#include "SdlRectCollision.h"
 
 public class GameEntity
 {
