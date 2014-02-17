@@ -1,4 +1,4 @@
-#include <Game.h>
+#include "Game.h"
 
 bool Game::InitializeGame()
 {
@@ -21,34 +21,34 @@ bool Game::InitializeGame()
 		return true;
 }
 
-private bool InitializeSDL()
+bool Game::InitializeSDL()
 {
 	return SDL_Init(SDL_INIT_VIDEO) > 0;
 }
 
-private bool CreateWindow()
+bool Game::CreateWindow()
 {
-	gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	gameWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		 				WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 
-	return gWindow != NULL;	
+	return gameWindow != NULL;	
 }
 
-private bool CreateRenderer()
+bool Game::CreateRenderer()
 {
-	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+	gameRenderer = SDL_CreateRenderer(gameWindow, -1, SDL_RENDERER_ACCELERATED);
 	
-	return gRenderer != NULL; 
+	return gameRenderer != NULL; 
 }
 
-private void IntializeRendererColor()
+void Game::IntializeRendererColor()
 {
-	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(gameRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 }
 
-private void InitializeImageLoading()
+bool Game::InitializeImageLoading()
 {
-	int imgFlags = IMG_INIT_PNG | IMG_INIT_JPEG;
+	int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 	
-	return IMG_Init(imgFlags) & imgFlags;
+	return ((IMG_Init(imgFlags) & imgFlags) != 0);
 }

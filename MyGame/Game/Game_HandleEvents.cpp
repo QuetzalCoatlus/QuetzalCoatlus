@@ -1,14 +1,14 @@
-#include <Game.h>
+#include "Game.h"
 
 void Game::HandleEvents(SDL_Event * event)
 {
-	switch(event.Type)
+	switch(event->type)
 	{
-		case SDL_Quit: Quit(); break;
+		case SDL_QUIT: Quit(); break;
 	}
 }
 
-private void Quit()
+void Game::Quit()
 {
 	gameIsRunning = false;
 }

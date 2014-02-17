@@ -1,3 +1,6 @@
+#ifndef _GAMETEXTURE_H_
+	#define _GAMETEXTURE_H_
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
@@ -27,3 +30,4 @@ public class GameTexture
 		int GetHeight();
 };
 
+#endif

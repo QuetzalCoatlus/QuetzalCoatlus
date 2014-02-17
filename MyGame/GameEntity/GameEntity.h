@@ -1,3 +1,6 @@
+#ifndef _GAMEENTITY_H_
+	#define _GAMEENTITY_H_
+
 #include <SDL2/SDL.h>
 
 public class GameEntity
@@ -15,3 +18,5 @@ public class GameEntity
 	public:
 		SDL_Rect * GetBoundingBox();
 };
+
+#endif

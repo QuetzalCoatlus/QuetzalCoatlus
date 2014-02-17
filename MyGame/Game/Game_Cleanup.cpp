@@ -1,20 +1,20 @@
-#include <Game.h>
+#include "Game.h"
 
 void Game::Cleanup()
 {
 	DestroyWindow();
-	QuitSdlSubsystems();
+	QuitSdlSubSystems();
 }
 
-private void DestroyWindow()
+void Game::DestroyWindow()
 {
 	SDL_DestroyRenderer(gameRenderer);
 	SDL_DestroyWindow(gameWindow);
-	gWindow=NULL;
-	gRenderer=NULL;
+	gameWindow=NULL;
+	gameRenderer=NULL;
 }
 
-private void QuitSdlSubSystems()
+void Game::QuitSdlSubSystems()
 {
 	IMG_Quit();
 	SDL_Quit();

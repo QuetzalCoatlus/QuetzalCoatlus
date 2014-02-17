@@ -1,4 +1,4 @@
-#include <Game.h>
+#include "Game.h"
 
 void Game::Render()
 {
@@ -6,12 +6,12 @@ void Game::Render()
 	UpdateScreen();
 }
 
-private void ClearScreen()
+void Game::ClearScreen()
 {
 	SDL_RenderClear(gameRenderer);
 }
 
-private void UpdateScreen()
+void Game::UpdateScreen()
 {
 	SDL_RenderPresent(gameRenderer);
 }

@@ -1,7 +1,10 @@
-#include <SDL2/SDL.h>
-#include <SDL/SDL_image.h>
+#ifndef _GAME_H_
+	#define _GAME_H_
 
-public class Game.h
+#include <SDL.h>
+#include <SDL_image.h>
+
+class Game
 {
 	private:
 		SDL_Window * gameWindow;
@@ -22,8 +25,23 @@ public class Game.h
 		bool LoadAssets();
 		void RunGameLoop(SDL_Event*);
 		void RunEventLoop(SDL_Event*);
-		void HandleEvents();
+		void HandleEvents(SDL_Event*);
+			void Quit();
 		void Update();
 		void Render();
 		void Cleanup();
+
+
+	private:
+		bool InitializeSDL();
+		bool CreateWindow();
+		bool CreateRenderer();
+		void IntializeRendererColor();
+		bool InitializeImageLoading();
+		void ClearScreen();
+		void UpdateScreen();
+		void DestroyWindow();
+		void QuitSdlSubSystems();
 };
+
+#endif
