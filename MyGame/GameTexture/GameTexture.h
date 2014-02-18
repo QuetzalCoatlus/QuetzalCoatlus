@@ -1,10 +1,11 @@
 #ifndef _GAMETEXTURE_H_
 	#define _GAMETEXTURE_H_
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <string>
+#include <SDL.h>
+#include <SDL_image.h>
 
-public class GameTexture
+class GameTexture
 {
 	private:
 		int textureHeight;
@@ -14,11 +15,11 @@ public class GameTexture
 		SDL_Texture * gameTexture;
 		
 	public:
-		LTexture();
+		GameTexture();
 		
 	public:
-		bool LoadTextureFromFile(std::string);
-		void RenderTexture(int,int,SDL_Renderer*,SDL_Rect*);
+		bool LoadTextureFromFile(std::string, SDL_Renderer*);
+		void RenderTexture(int,int,SDL_Renderer*,SDL_Rect*clippingArea=NULL);
 		void SetColorModulation(Uint8,Uint8,Uint8);
 		void DestroyTexture();
 		

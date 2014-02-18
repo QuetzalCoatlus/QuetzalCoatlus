@@ -14,7 +14,7 @@ bool Game::InitializeGame()
 		if (!successfullyCreatedRenderer)
 			return false;
 		
-		bool successfullyInitImgLoading= IntializeImageLoading();
+		bool successfullyInitImgLoading= InitializeImageLoading();
 		if (!successfullyInitImgLoading)
 			return false;
 		

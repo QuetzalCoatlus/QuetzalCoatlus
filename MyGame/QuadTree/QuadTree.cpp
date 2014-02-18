@@ -3,7 +3,7 @@
 QuadTree::QuadTree(const int treeWidth, const int treeHeight)
 {
 	treeRoot = new QuadTreeNode();
-	treeRoot.SetBoundingBox(new SDL_Rect{0,0,treeWidth,treeHeight});
+	treeRoot->SetBoundingBox(new SDL_Rect{0,0,treeWidth,treeHeight});
 }
 
 void QuadTree::Update()
@@ -29,7 +29,7 @@ void QuadTree::UpdateEntity(GameEntity * entity)
 	entity->SetStatusToUpdated();
 }
 
-bool QuadTree::Insert(GameEntity * entity, QuadTreeNode * startNode = treeNode)
+bool QuadTree::Insert(GameEntity * entity, QuadTreeNode*)
 {
 	if(entity == NULL || treeNode == NULL)
 		return false;
@@ -51,7 +51,7 @@ bool QuadTree::Insert(GameEntity * entity, QuadTreeNode * startNode = treeNode)
 
 bool QuadTree::InsertIntoFullQuad(GameEntity * entity, QuadTreeNode * startNode)
 {
-	if(entity->Insert(entity))
+	if(startNode->Insert(entity))
 		return true;
 	else if(startNode->CanSplit(QuadTreeMaxDepth))
 	{
@@ -68,7 +68,7 @@ bool QuadTree::InsertIntoFullQuad(GameEntity * entity, QuadTreeNode * startNode)
 
 bool QuadTree::InsertIntoBranch(GameEntity * entity, QuadTreeNode * startNode)
 {
-	std::vector<QuadTreeNode*> startNodeChildren = 
+	std::vector<QuadTreeNode*> * startNodeChildren =
 			startNode->GetNodeChildren();
 
 	for(int j = 0; j < QuadTreeNode::QuadTreeNodeCapacity; ++j)
@@ -91,7 +91,7 @@ GameEntity * QuadTree::Collides(GameEntity * entity)
 	return CheckLeaf(entity, treeRoot);
 }
 
-GameEntity * QuadTree::CheckLeaf(GameEntity * entity, QuadTreeNode * startNode)
+GameEntity * QuadTree::CheckLeaf(const GameEntity * entity, QuadTreeNode * startNode)
 {
 	if(startNode->IsLeaf())
 		return CheckCollisionOnLeaf(entity, startNode);

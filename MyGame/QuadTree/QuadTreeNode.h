@@ -1,10 +1,11 @@
 #ifndef _QUADTREENODE_H_
 	#define _QUADTREENODE_H_
 
+#include <vector>
 #include <SDL.h>
 #include "SdlRectCollision.h"
+#include "GameEntity.h"
 
-template <GameEntity> 
 class QuadTreeNode
 {		
 	private:
@@ -13,7 +14,8 @@ class QuadTreeNode
 		
 	private:
 		const int QuadTreeNodeCapacity=4;
-		
+        bool isNodeFull;
+    
 	private:	
 		int nodeDepth;
 		QuadTreeNode * parentNode;
@@ -23,14 +25,14 @@ class QuadTreeNode
 		
 		
 	public:
-		QuadTree(const int);
+		QuadTreeNode(const int depth = 0);
 		
 	public:	
 		void Split();
-		bool Insert(GameEntity*,bool,int);
+		bool Insert(GameEntity*,int,bool forceIntoNode=false);
 		bool Remove(GameEntity*);
-		bool NodeCollision(GameEntity*);
-		bool ChildCollision(GameEntity*);
+		bool NodeCollision(const GameEntity*);
+		bool ChildCollision(const GameEntity*);
 		void SetBoundingBox(SDL_Rect*);
 		std::vector<QuadTreeNode*> * GetNodeChildren();
 		std::vector<GameEntity*> * GetNodeObjects();
@@ -49,7 +51,7 @@ class QuadTreeNode
 		void DestroyAllChildren();
 		void DestroyChild(QuadTreeNode*);
 		void CreateNewChildren();
-		void GetChildBoundingBox(int);
+		SDL_Rect * GetChildBoundingBox(int);
 		void MoveNodeObjectsToChildren(QuadTreeNode*);
 		void MoveToChildIfCollisionOccurs(QuadTreeNode*,int);
 

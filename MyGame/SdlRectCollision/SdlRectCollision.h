@@ -1,10 +1,15 @@
-#include <SDL2/SDL.h>
+#ifndef _SDLRECTCOLLISION_H_
+    #define _SDLRECTCOLLISION_H_
 
-public class SdlRectCollision
+#include <SDL.h>
+
+class SdlRectCollision
 {
 	private:
 		SdlRectCollision();
 
 	public:
-		bool Collides(SDL_Rect*, SDL_Rect*);
-}
+		static bool Collides(SDL_Rect*, SDL_Rect*);
+};
+
+#endif

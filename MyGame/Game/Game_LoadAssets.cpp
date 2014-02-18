@@ -2,5 +2,5 @@
 
 bool Game::LoadAssets()
 {
-	
+	return true;
 }

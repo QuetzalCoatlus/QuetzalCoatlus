@@ -24,6 +24,8 @@ int Game::ExecuteGame()
 	SDL_Event event;
 		
 	RunGameLoop(&event);
+    
+    return 0;
 }
 
 void Game::RunGameLoop(SDL_Event * event)
@@ -41,7 +43,7 @@ void Game::RunEventLoop(SDL_Event * event)
 {
 	while(SDL_PollEvent(event))
 	{
-		HandleEvents();
+		HandleEvents(event);
 	}
 }
 

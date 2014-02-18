@@ -16,10 +16,10 @@ class QuadTree
 		void Update();
 
 	private:
-		UpdateEntity(GameEntity*);
+		void UpdateEntity(GameEntity*);
 	
 	private:
-		GameEntity * CheckLeaf(const GameEntity*, QuadTreeNode * startNode = treeRoot);
+		GameEntity * CheckLeaf(const GameEntity*, QuadTreeNode*);
 		bool InsertIntoFullQuad(GameEntity*,QuadTreeNode*);
 		bool InsertIntoBranch(GameEntity*,QuadTreeNode*);
 		bool InsertOnUpdate(GameEntity*,QuadTreeNode*);
@@ -29,7 +29,7 @@ class QuadTree
 		static const int QuadTreeMaxDepth = 6;
 
 	private:	
-		QuadTreeNode treeRoot;
+		QuadTreeNode * treeRoot;
 		std::vector<GameEntity*> allEntitiesInQuadTree;
 };
 

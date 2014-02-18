@@ -8,7 +8,7 @@ GameTexture::GameTexture()
 	gameTexture=NULL;
 }
 
-bool GameTexture::LoadTextureFromFile(std::string filename)
+bool GameTexture::LoadTextureFromFile(std::string filename, SDL_Renderer * gameRenderer)
 {
 	DestroyTexture();
 	
@@ -21,7 +21,7 @@ bool GameTexture::LoadTextureFromFile(std::string filename)
 	ColorKeyImage(surfaceLoadedFromFile);
 	
 	newGameTexture = 
-		SDL_CreateTextureFromSurface(surfaceLoadedFromFile);
+		SDL_CreateTextureFromSurface(gameRenderer, surfaceLoadedFromFile);
 	if(newGameTexture==NULL)
 		return false;
 	
@@ -45,10 +45,9 @@ Uint32 GameTexture::MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat)
 	return SDL_MapRGB(surfaceWithPixelFormat->format, 0x00, 0xFF, 0xFF);
 }
 
-void GameTexture::Render(int x, int y, SDL_Renderer * gameRenderer
-							SDL_Rect * clippingArea=NULL)
+void GameTexture::RenderTexture(int x, int y, SDL_Renderer * gameRenderer, SDL_Rect * clippingArea)
 {
-	SDL_Rect renderArea = 
+	SDL_Rect * renderArea =
 				new SDL_Rect{x, y, textureWidth, textureHeight};
 	
 	if(clippingArea!=NULL)
@@ -57,7 +56,7 @@ void GameTexture::Render(int x, int y, SDL_Renderer * gameRenderer
 		renderArea->h=clippingArea->h;
 	}
 	
-	SDL_RenderCopy(gameRenderer, gameTexture, clippingArea, &renderArea);
+	SDL_RenderCopy(gameRenderer, gameTexture, clippingArea, renderArea);
 }
 
 void GameTexture::DestroyTexture()

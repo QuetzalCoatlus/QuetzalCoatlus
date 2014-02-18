@@ -1,6 +1,6 @@
 #include "QuadTree.h"
 
-QuadTreeNode::QuadTreeNode(const int depth = 0)
+QuadTreeNode::QuadTreeNode(const int depth)
 {
 	nodeChildren.clear();
 	nodeChildren.reserve(4);
@@ -9,19 +9,18 @@ QuadTreeNode::QuadTreeNode(const int depth = 0)
 	nodeBoundingBox = NULL;
 	parentNode = NULL;
 	isNodeFull = false;
-	isNodeLeaf = true;
 	nodeDepth = depth;
 }
 
 void QuadTreeNode::Split()
 {
-    if(!isNodeLeaf)
-		this->DestroyOldChildren();
+    if(!IsLeaf())
+		this->DestroyAllChildren();
 
 	CreateNewChildren();
 }
 
-void QuadTreeNode::DestroyOldChildren()
+void QuadTreeNode::DestroyAllChildren()
 {
     for(int i = 0; i < nodeChildren.size(); i++)
 	{
@@ -46,9 +45,9 @@ void QuadTreeNode::CreateNewChildren()
 		
 		nodeChildren[i] = new QuadTreeNode(++nodeDepth);
 		nodeChildren[i]->SetParent(this);
-		nodeChildren[i]->SetBoundingBox(GetChildBoundingBox(index));
+		nodeChildren[i]->SetBoundingBox(GetChildBoundingBox(i));
 		
-		moveNodeObjectsToChildren(nodeChildren[i]);
+		MoveNodeObjectsToChildren(nodeChildren[i]);
 	}
 }
 
@@ -57,10 +56,10 @@ void QuadTreeNode::SetParent(QuadTreeNode * parent)
 	parentNode = this;
 }
 
-void QuadTreeNode::GetChildBoundingBox(int index)
+SDL_Rect * QuadTreeNode::GetChildBoundingBox(int index)
 {
-	int childWidth = ++(nodeBoundingBox->w / 2);
-	int childHeight = ++(nodeBoundingBox->h / 2);
+	int childWidth = (nodeBoundingBox->w / 2)+1;
+	int childHeight = (nodeBoundingBox->h / 2)+1;
 	
 	int childXQuadrant = index % 2;
 	int childYQuadrant = index / 2;
@@ -70,10 +69,10 @@ void QuadTreeNode::GetChildBoundingBox(int index)
 	
 	return new SDL_Rect
 				{
-					x = childXPosition,
-					y = childYPosition,
-					w = childWidth,
-					h = childHeight
+					childXPosition,
+					childYPosition,
+					childWidth,
+					childHeight
 				};
 }
 
@@ -87,21 +86,21 @@ void QuadTreeNode::MoveNodeObjectsToChildren(QuadTreeNode * child)
 
 void QuadTreeNode::MoveToChildIfCollisionOccurs(QuadTreeNode * child, int entityIndex)
 {
-	if(child->NodeCollision(entity))
+	if(child->NodeCollision(nodeObjects[entityIndex]))
 	{
-		child->Insert(nodeObjects[entityIndex]);
+		child->Insert(nodeObjects[entityIndex],0,true);
 		this->nodeObjects.erase(this->nodeObjects.begin() + entityIndex);
 	}
 }
 
-bool QuadTreeNode::Insert(GameEntity * entity, bool forceIntoNode, int maxObjectsInTree)
+bool QuadTreeNode::Insert(GameEntity * entity,  int maxObjectsInTree, bool forceIntoNode)
 {
-	if(nodeIsFull && !forceIntoNode)
+	if(IsFull() && !forceIntoNode)
 		return false;
 	
-	nodeObjects.pushback(entity);
+	nodeObjects.push_back(entity);
 	
-	nodeIsFull = nodeObjects.size() >= maxObjectsInTree;
+	isNodeFull = nodeObjects.size() >= maxObjectsInTree;
 	
 	return true;
 }
@@ -151,7 +150,7 @@ bool QuadTreeNode::IsLeaf()
 
 bool QuadTreeNode::IsFull()
 {
-	return isFull;
+	return isNodeFull;
 }
 
 bool QuadTreeNode::CanSplit(const int maxSize)
