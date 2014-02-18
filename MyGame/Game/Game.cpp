@@ -4,7 +4,7 @@ Game::Game()
 {
 	gameWindow=NULL;
 	gameRenderer=NULL;
-	gameTexture=NULL;
+	gameTexture=new GameTexture();
 	
 	gameIsRunning=true;
 }

@@ -3,13 +3,14 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include "GameTexture.h"
 
 class Game
 {
 	private:
 		SDL_Window * gameWindow;
 		SDL_Renderer * gameRenderer;
-		SDL_Texture * gameTexture;
+		GameTexture * gameTexture;
 		
 	private:
 		bool gameIsRunning;
@@ -44,9 +45,11 @@ class Game
 		bool InitializeImageLoading();
 		//---Render Private Functions---------/
 		void ClearScreen();
+        void DisplayTextures();
 		void UpdateScreen();
 		//---Cleanup Private Functions -------/
 		void DestroyWindow();
+        void DestroyTextures();
 		void QuitSdlSubSystems();
 };
 

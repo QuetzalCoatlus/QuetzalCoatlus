@@ -1,4 +1,5 @@
 #include "GameTexture.h"
+#include <iostream>
 
 GameTexture::GameTexture()
 {
@@ -11,20 +12,24 @@ GameTexture::GameTexture()
 bool GameTexture::LoadTextureFromFile(std::string filename, SDL_Renderer * gameRenderer)
 {
 	DestroyTexture();
+    
 	
 	SDL_Texture * newGameTexture = NULL;
 	
 	SDL_Surface * surfaceLoadedFromFile = IMG_Load(filename.c_str());
 	if(surfaceLoadedFromFile==NULL)
+    {
+        std::cout << "Image wasn't loaded" << std::endl;
 		return false;
-	
-	ColorKeyImage(surfaceLoadedFromFile);
+	}
+        
+	//ColorKeyImage(surfaceLoadedFromFile);
 	
 	newGameTexture = 
 		SDL_CreateTextureFromSurface(gameRenderer, surfaceLoadedFromFile);
 	if(newGameTexture==NULL)
 		return false;
-	
+    
 	textureWidth = surfaceLoadedFromFile->w;
 	textureHeight = surfaceLoadedFromFile->h;
 	
