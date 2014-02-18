@@ -1,29 +1,30 @@
 #include "Game.h"
+#include <iostream>
 
 bool Game::InitializeGame()
 {
 		bool successfullyInitializedSDL = InitializeSDL();
 		if(!successfullyInitializedSDL)
 			return false;
-		
+    
 		bool successfullyCreatedWindow = CreateWindow();
 		if (!successfullyCreatedWindow)
 			return false;
-		
+    
 		bool successfullyCreatedRenderer = CreateRenderer();
 		if (!successfullyCreatedRenderer)
 			return false;
-		
+    
 		bool successfullyInitImgLoading= InitializeImageLoading();
 		if (!successfullyInitImgLoading)
 			return false;
-		
+    
 		return true;
 }
 
 bool Game::InitializeSDL()
 {
-	return SDL_Init(SDL_INIT_VIDEO) > 0;
+	return SDL_Init(SDL_INIT_VIDEO) >= 0;
 }
 
 bool Game::CreateWindow()
