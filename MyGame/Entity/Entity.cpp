@@ -1,27 +1,27 @@
-#include "GameEntity.h"
+#include "Entity.h"
 
-GameEntity::GameEntity(SDL_Rect * boundingBox)
+Entity::Entity(SDL_Rect * boundingBox)
 {
 	this->entityBoundingBox = boundingBox;
     this->hasBeenUpdated = false;
 }
 
-bool GameEntity::CheckCollision(SDL_Rect * boundingBox)
+bool Entity::CheckCollision(SDL_Rect * boundingBox)
 {
 	return SdlRectCollision::Collides(this->entityBoundingBox, boundingBox);
 }
 
-bool GameEntity::CheckCollision(GameEntity * entity)
+bool Entity::CheckCollision(Entity * entity)
 {
 	return SdlRectCollision::Collides(this->entityBoundingBox, entity->entityBoundingBox);
 }
 
-SDL_Rect * GameEntity::GetBoundingBox()
+SDL_Rect * Entity::GetBoundingBox()
 {
 	return entityBoundingBox;
 }
 
-bool GameEntity::NeedsUpdate()
+bool Entity::NeedsUpdate()
 {
     return hasBeenUpdated;
 }

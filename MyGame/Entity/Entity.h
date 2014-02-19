@@ -1,23 +1,23 @@
-#ifndef _GAMEENTITY_H_
-	#define _GAMEENTITY_H_
+#ifndef _ENTITY_H_
+	#define _ENTITY_H_
 
 #include <SDL.h>
 #include "SdlRectCollision.h"
 
-class GameEntity
+class Entity
 {
 	private:
 		SDL_Rect * entityBoundingBox;
     
 	public:
-		GameEntity(SDL_Rect*);
+		Entity(SDL_Rect*);
     
     public:
         bool hasBeenUpdated;
 
 	public:
 		bool CheckCollision(SDL_Rect *);
-		bool CheckCollision(GameEntity*);
+		bool CheckCollision(Entity*);
         bool NeedsUpdate();
     
 public:
