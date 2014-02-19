@@ -2,5 +2,7 @@
 
 bool Game::LoadAssets()
 {
-	return gameTexture->LoadTextureFromFile("/Users/fantasyzone/Documents/C:C++ Programming/QuetzalCoatlus/QuetzalCoatlus/test_image.jpg", gameRenderer);
+    gameAnimation->SetMaxFramesInAnimation(6);
+
+	return gameTexture->LoadTextureFromFile("/Users/fantasyzone/Documents/C:C++ Programming/QuetzalCoatlus/QuetzalCoatlus/WalkCycle.png", gameRenderer);
 }

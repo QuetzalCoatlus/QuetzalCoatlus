@@ -19,5 +19,13 @@ void Game::UpdateScreen()
 
 void Game::DisplayTextures()
 {
-    gameTexture->RenderTexture(0, 0, gameRenderer);
+    SDL_Rect clip =
+    {
+        0,
+        gameAnimation->GetCurrentFrame()*73,
+        64,
+        73
+    };
+        
+    gameTexture->RenderTexture(0, 0, gameRenderer,&clip);
 }

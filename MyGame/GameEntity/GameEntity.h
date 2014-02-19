@@ -13,7 +13,7 @@ class GameEntity
 		GameEntity(SDL_Rect*);
     
     public:
-    bool hasBeenUpdated;
+        bool hasBeenUpdated;
 
 	public:
 		bool CheckCollision(SDL_Rect *);

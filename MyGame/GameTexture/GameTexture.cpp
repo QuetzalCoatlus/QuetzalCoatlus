@@ -23,7 +23,7 @@ bool GameTexture::LoadTextureFromFile(std::string filename, SDL_Renderer * gameR
 		return false;
 	}
         
-	//ColorKeyImage(surfaceLoadedFromFile);
+	ColorKeyImage(surfaceLoadedFromFile);
 	
 	newGameTexture = 
 		SDL_CreateTextureFromSurface(gameRenderer, surfaceLoadedFromFile);
@@ -47,7 +47,7 @@ void GameTexture::ColorKeyImage(SDL_Surface * surfaceToColorKey)
 
 Uint32 GameTexture::MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat)
 {
-	return SDL_MapRGB(surfaceWithPixelFormat->format, 0x00, 0xFF, 0xFF);
+	return SDL_MapRGB(surfaceWithPixelFormat->format, 0x00, 0xFF, 0xF0);
 }
 
 void GameTexture::RenderTexture(int x, int y, SDL_Renderer * gameRenderer, SDL_Rect * clippingArea)

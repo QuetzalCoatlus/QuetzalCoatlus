@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "GameTexture.h"
+#include "GameAnimation.h"
 
 class Game
 {
@@ -11,6 +12,7 @@ class Game
 		SDL_Window * gameWindow;
 		SDL_Renderer * gameRenderer;
 		GameTexture * gameTexture;
+        GameAnimation * gameAnimation;
 		
 	private:
 		bool gameIsRunning;

@@ -2,5 +2,5 @@
 
 void Game::Update()
 {
-
+    gameAnimation->Animate();
 }
