@@ -43,7 +43,7 @@ class Game
 		bool InitializeSDL();
 		bool CreateWindow();
 		bool CreateRenderer();
-		void IntializeRendererColor();
+		void InitializeRendererColor();
 		bool InitializeImageLoading();
 		//---Render Private Functions---------/
 		void ClearScreen();

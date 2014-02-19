@@ -38,13 +38,14 @@ bool Game::CreateWindow()
 bool Game::CreateRenderer()
 {
 	gameRenderer = SDL_CreateRenderer(gameWindow, -1, SDL_RENDERER_ACCELERATED);
-	
+	InitializeRendererColor();
+    
 	return gameRenderer != NULL; 
 }
 
-void Game::IntializeRendererColor()
+void Game::InitializeRendererColor()
 {
-	SDL_SetRenderDrawColor(gameRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(gameRenderer, 0x00, 0xFF, 0xEF, 0xFF);
 }
 
 bool Game::InitializeImageLoading()

@@ -8,7 +8,7 @@ GameAnimation::GameAnimation()
     timeAtLastCycle=0;
     
     framesIncremented=1;
-    frameRate=90;
+    frameRate=160;
 }
 
 void GameAnimation::Animate()
