@@ -4,6 +4,7 @@ void Game::Cleanup()
 {
 	DestroyWindow();
     DestroyTextures();
+    gameEntity->Destroy();
 	QuitSdlSubSystems();
 }
 
@@ -17,8 +18,7 @@ void Game::DestroyWindow()
 
 void Game::DestroyTextures()
 {
-    gameTexture->DestroyTexture();
-    gameTexture=NULL;
+
 }
 
 void Game::QuitSdlSubSystems()

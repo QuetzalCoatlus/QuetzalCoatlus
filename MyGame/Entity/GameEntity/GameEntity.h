@@ -2,22 +2,40 @@
 	#define _GAMEENTITY_H_
 
 #include <SDL.h>
+#include <string>
+
+#include "Entity.h"
+#include "GameTexture.h"
+#include "GameFps.h"
+#include "GameAnimation.h"
 #include "SdlRectCollision.h"
-
-class GameEntity : Entity
+class GameEntity : public Entity
 {
-	public:
-		GameEntity(SDL_Rect*);
+    private:
+        GameTexture * entityTexture;
+        GameAnimation * entityAnimation;
+    
+    private:
+        float xVelocity;
+        float yVelocity;
+    
+    public:
+        bool isMovingLeft;
+        bool isMovingRight;
+        bool isMovingUp;
+        bool isMovingDown;
 
 	public:
-		void Load();
+		GameEntity(int,int);
+
+	public:
+		bool Load(std::string,SDL_Renderer*);
 		void Update();
-		bool Render();
+		void Render(SDL_Renderer*);
 		void Destroy();
 
 	public:
 		void Move();
-		void StopMotion();
 
 	public:
 		void HandleCollision();

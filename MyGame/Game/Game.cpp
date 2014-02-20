@@ -4,8 +4,6 @@ Game::Game()
 {
 	gameWindow=NULL;
 	gameRenderer=NULL;
-	gameTexture=new GameTexture();
-	gameAnimation=new GameAnimation();
 	gameIsRunning=true;
 }
 

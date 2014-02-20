@@ -2,5 +2,6 @@
 
 void Game::Update()
 {
-    gameAnimation->Animate();
+    GameFps::FpsControl.Update();
+    gameEntity->Update();
 }

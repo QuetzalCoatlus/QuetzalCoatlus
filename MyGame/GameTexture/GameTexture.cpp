@@ -52,16 +52,15 @@ Uint32 GameTexture::MapRgbToPixelFormat(SDL_Surface * surfaceWithPixelFormat)
 
 void GameTexture::RenderTexture(int x, int y, SDL_Renderer * gameRenderer, SDL_Rect * clippingArea)
 {
-	SDL_Rect * renderArea =
-				new SDL_Rect{x, y, textureWidth, textureHeight};
+	SDL_Rect renderArea = {x, y, textureWidth, textureHeight};
 	
 	if(clippingArea!=NULL)
 	{
-		renderArea->w=clippingArea->w;
-		renderArea->h=clippingArea->h;
+		renderArea.w=clippingArea->w;
+		renderArea.h=clippingArea->h;
 	}
 	
-	SDL_RenderCopy(gameRenderer, gameTexture, clippingArea, renderArea);
+	SDL_RenderCopy(gameRenderer, gameTexture, clippingArea, &renderArea);
 }
 
 void GameTexture::DestroyTexture()

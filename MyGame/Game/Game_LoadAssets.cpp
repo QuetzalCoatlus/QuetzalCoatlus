@@ -2,7 +2,14 @@
 
 bool Game::LoadAssets()
 {
-    gameAnimation->SetMaxFramesInAnimation(6);
-
-	return gameTexture->LoadTextureFromFile("/Users/fantasyzone/Documents/C:C++ Programming/QuetzalCoatlus/QuetzalCoatlus/WalkCycle.png", gameRenderer);
+    SDL_Rect * entityBoundingBox = new SDL_Rect
+    {
+      0,
+      0,
+      64,
+      73
+    };
+    gameEntity = new GameEntity(0,0);
+    gameEntity->Load("/Users/fantasyzone/Documents/C:C++ Programming/QuetzalCoatlus/QuetzalCoatlus/WalkCycle.png", gameRenderer);
+    return true;
 }

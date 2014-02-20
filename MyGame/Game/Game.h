@@ -3,16 +3,15 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include "GameTexture.h"
-#include "GameAnimation.h"
+#include "GameEntity.h"
+#include "GameFps.h"
 
 class Game
 {
 	private:
 		SDL_Window * gameWindow;
 		SDL_Renderer * gameRenderer;
-		GameTexture * gameTexture;
-        GameAnimation * gameAnimation;
+        GameEntity * gameEntity;
 		
 	private:
 		bool gameIsRunning;
@@ -34,6 +33,8 @@ class Game
 	public: 
 		//---Event Private Functions ---------/
 		void Quit();
+        void KeyDown(SDL_Keycode);
+        void KeyUp(SDL_Keycode);
 
 	private:
 		//---Execution Private Functions------/

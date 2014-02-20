@@ -6,22 +6,13 @@
 
 class Entity
 {
-	private:
-		SDL_Rect * entityBoundingBox;
+	protected:
+		float xPosition;
+        float yPosition;
     
 	public:
-		Entity(SDL_Rect*);
+		Entity(int,int);
     
-    public:
-        bool hasBeenUpdated;
-
-	public:
-		bool CheckCollision(SDL_Rect *);
-		bool CheckCollision(Entity*);
-        bool NeedsUpdate();
-    
-public:
-		SDL_Rect * GetBoundingBox();
 };
 
 #endif
