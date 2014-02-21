@@ -12,6 +12,9 @@ GameEntity::GameEntity(int x, int y) : Entity(x,y)
     isMovingDown = false;
     isMovingRight = false;
     isMovingUp = false;
+    isFacingRight = true;
+    
+    currentFrameState = 0;
 }
 
 bool GameEntity::Load(std::string filename, SDL_Renderer *gameRenderer)
@@ -23,7 +26,27 @@ bool GameEntity::Load(std::string filename, SDL_Renderer *gameRenderer)
 
 void GameEntity::Update()
 {
+    bool isNotMoving = !isMovingDown &&
+    !isMovingUp && !isMovingLeft && !isMovingRight;
+
+    if(isMovingLeft)
+        currentFrameState = 3;
+    else if(isMovingRight)
+        currentFrameState = 2;
+    else if(isFacingLeft && isNotMoving)
+        currentFrameState = 1;
+    else if(isFacingRight&& isNotMoving)
+        currentFrameState = 0;
+    else if((isMovingUp && isFacingLeft) || (isMovingDown && isFacingLeft))
+        currentFrameState = 3;
+    else if ((isMovingDown && isFacingRight) ||
+        (isMovingUp && isFacingRight))
+        currentFrameState = 2;
+    
+    
+    
     entityAnimation->Animate();
+    
     Move();
 }
 
@@ -31,7 +54,7 @@ void GameEntity::Render(SDL_Renderer * gameRenderer)
 {
        SDL_Rect clip =
     {
-        0,
+        currentFrameState * 64,
         entityAnimation->GetCurrentFrame()*73,
         64,
         73
@@ -47,14 +70,41 @@ void GameEntity::Destroy()
 
 void GameEntity::Move()
 {
+    float xDisplacement = 0.0f;
+    float yDisplacement = 0.0f;
+    
     if(isMovingLeft)
-        xPosition -= GameFps::FpsControl.GetSpeedFactor() * xVelocity;
+        xDisplacement -= GameFps::FpsControl.GetSpeedFactor() * xVelocity;
     else if(isMovingRight)
-        xPosition +=  GameFps::FpsControl.GetSpeedFactor() * xVelocity;
-    else if(isMovingUp)
-        yPosition -=  GameFps::FpsControl.GetSpeedFactor() * yVelocity;
+        xDisplacement +=  GameFps::FpsControl.GetSpeedFactor() * xVelocity;
+    if(isMovingUp)
+        yDisplacement -=  GameFps::FpsControl.GetSpeedFactor() * yVelocity;
     else if(isMovingDown)
-        yPosition +=  GameFps::FpsControl.GetSpeedFactor() * yVelocity;
+        yDisplacement +=  GameFps::FpsControl.GetSpeedFactor() * yVelocity;
+    
+    IncrementalMove(xDisplacement,yDisplacement);
+}
+
+void GameEntity::IncrementalMove(float xDisplacement, float yDisplacement)
+{
+    double incrementalDisplacementX = 0;
+    double incrementalDisplacementY = 0;
+    
+    if(xDisplacement == 0 && yDisplacement == 0)
+        return;
+    
+    if(xDisplacement > 0)
+        incrementalDisplacementX = GameFps::FpsControl.GetSpeedFactor();
+    else if (xDisplacement < 0)
+        incrementalDisplacementX = -GameFps::FpsControl.GetSpeedFactor();
+    
+    if(yDisplacement > 0)
+        incrementalDisplacementY = GameFps::FpsControl.GetSpeedFactor();
+    else if (yDisplacement < 0)
+        incrementalDisplacementY = -GameFps::FpsControl.GetSpeedFactor();
+    
+    xPosition +=xDisplacement;
+    yPosition +=yDisplacement;
 }
 
 void GameEntity::HandleCollision()

@@ -34,11 +34,19 @@ void Game::KeyDown(SDL_Keycode code)
             gameEntity->isMovingDown = true;
             break;
         case SDLK_LEFT:
+        {
             gameEntity->isMovingLeft = true;
+            gameEntity->isFacingLeft = true;
+            gameEntity->isFacingRight = false;
             break;
+        }
         case SDLK_RIGHT:
+        {
             gameEntity->isMovingRight = true;
+            gameEntity->isFacingRight = true;
+            gameEntity->isFacingLeft = false;
             break;
+        }
     }
 }
 

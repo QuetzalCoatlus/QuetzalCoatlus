@@ -19,11 +19,17 @@ class GameEntity : public Entity
         float xVelocity;
         float yVelocity;
     
+    private:
+        int currentFrameState;
+    
     public:
         bool isMovingLeft;
         bool isMovingRight;
         bool isMovingUp;
         bool isMovingDown;
+    
+        bool isFacingLeft;
+        bool isFacingRight;
 
 	public:
 		GameEntity(int,int);
@@ -36,6 +42,9 @@ class GameEntity : public Entity
 
 	public:
 		void Move();
+    
+    private:
+        void IncrementalMove(float,float);
 
 	public:
 		void HandleCollision();
