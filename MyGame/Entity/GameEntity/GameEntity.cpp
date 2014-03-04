@@ -1,5 +1,4 @@
 #include "GameEntity.h"
-#include <iostream>
 
 GameEntity::GameEntity(int x, int y) : Entity(x,y)
 {
@@ -12,7 +11,9 @@ GameEntity::GameEntity(int x, int y) : Entity(x,y)
     isMovingDown = false;
     isMovingRight = false;
     isMovingUp = false;
+    isFacingLeft = false;
     isFacingRight = true;
+    isJumping = false;
     
     currentFrameState = 0;
 }
@@ -26,6 +27,44 @@ bool GameEntity::Load(std::string filename, SDL_Renderer *gameRenderer)
 
 void GameEntity::Update()
 {
+    if(!isMovingUp && !isMovingDown)
+    {
+        if(PlayerInput::upButton.isPressed)
+            isMovingUp = true;
+        else if(PlayerInput::downButton.isPressed)
+            isMovingDown = true;
+    }
+    else
+    {
+        if(!PlayerInput::upButton.isPressed)
+            isMovingUp = false;
+        if(!PlayerInput::downButton.isPressed)
+            isMovingDown = false;
+    }
+    
+    if(!isMovingLeft && !isMovingRight)
+    {
+        if(PlayerInput::leftButton.isPressed)
+        {
+            isMovingLeft = true;
+            isFacingLeft = true;
+            isFacingRight = false;
+        }
+        else if(PlayerInput::rightButton.isPressed)
+        {
+            isMovingRight = true;
+            isFacingRight = true;
+            isFacingLeft = false;
+        }
+    }
+    else
+    {
+        if(!PlayerInput::leftButton.isPressed)
+            isMovingLeft = false;
+        if(!PlayerInput::rightButton.isPressed)
+            isMovingRight = false;
+    }
+    
     bool isNotMoving = !isMovingDown &&
     !isMovingUp && !isMovingLeft && !isMovingRight;
 
@@ -82,7 +121,17 @@ void GameEntity::Move()
     else if(isMovingDown)
         yDisplacement +=  GameFps::FpsControl.GetSpeedFactor() * yVelocity;
     
+    bool isMovingDiagonally = (isMovingDown || isMovingUp) && (isMovingLeft ||isMovingRight);
+    
+    if(isMovingDiagonally)
+    {
+        xDisplacement *= DiagonalFactor;
+        yDisplacement *= DiagonalFactor;
+    }
+    
     IncrementalMove(xDisplacement,yDisplacement);
+    
+    
 }
 
 void GameEntity::IncrementalMove(float xDisplacement, float yDisplacement)

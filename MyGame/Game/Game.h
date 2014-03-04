@@ -5,6 +5,7 @@
 #include <SDL_image.h>
 #include "GameEntity.h"
 #include "GameFps.h"
+#include "PlayerInput.h"
 
 class Game
 {

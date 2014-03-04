@@ -19,6 +19,8 @@ bool Game::InitializeGame()
 		if (!successfullyInitImgLoading)
 			return false;
     
+        PlayerInput::Initialize();
+    
 		return true;
 }
 

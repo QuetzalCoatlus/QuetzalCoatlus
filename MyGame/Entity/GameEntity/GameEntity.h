@@ -3,10 +3,12 @@
 
 #include <SDL.h>
 #include <string>
+#include <math.h>
 
 #include "Entity.h"
 #include "GameTexture.h"
 #include "GameFps.h"
+#include "PlayerInput.h"
 #include "GameAnimation.h"
 #include "SdlRectCollision.h"
 class GameEntity : public Entity
@@ -18,6 +20,7 @@ class GameEntity : public Entity
     private:
         float xVelocity;
         float yVelocity;
+        float zVelocity;
     
     private:
         int currentFrameState;
@@ -30,6 +33,11 @@ class GameEntity : public Entity
     
         bool isFacingLeft;
         bool isFacingRight;
+    
+        bool isJumping;
+
+    public:
+        const float DiagonalFactor = sqrt(2.0)/2;
 
 	public:
 		GameEntity(int,int);
